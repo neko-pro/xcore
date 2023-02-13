@@ -5,8 +5,8 @@ import (
 	"crypto/md5"
 	"hash"
 
-	"github.com/xtls/xray-core/common"
-	"github.com/xtls/xray-core/common/uuid"
+	"github.com/dharak36/xray-core/common"
+	"github.com/dharak36/xray-core/common/uuid"
 )
 
 const (

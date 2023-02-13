@@ -4,12 +4,12 @@ import (
 	"encoding/binary"
 	"io"
 
-	"github.com/xtls/xray-core/common"
-	"github.com/xtls/xray-core/common/bitmask"
-	"github.com/xtls/xray-core/common/buf"
-	"github.com/xtls/xray-core/common/net"
-	"github.com/xtls/xray-core/common/protocol"
-	"github.com/xtls/xray-core/common/serial"
+	"github.com/dharak36/xray-core/common"
+	"github.com/dharak36/xray-core/common/bitmask"
+	"github.com/dharak36/xray-core/common/buf"
+	"github.com/dharak36/xray-core/common/net"
+	"github.com/dharak36/xray-core/common/protocol"
+	"github.com/dharak36/xray-core/common/serial"
 )
 
 type SessionStatus byte

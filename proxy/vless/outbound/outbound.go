@@ -1,31 +1,31 @@
 package outbound
 
-//go:generate go run github.com/xtls/xray-core/common/errors/errorgen
+//go:generate go run github.com/dharak36/xray-core/common/errors/errorgen
 
 import (
 	"context"
 	"syscall"
 
-	"github.com/xtls/xray-core/common"
-	"github.com/xtls/xray-core/common/buf"
-	"github.com/xtls/xray-core/common/net"
-	"github.com/xtls/xray-core/common/platform"
-	"github.com/xtls/xray-core/common/protocol"
-	"github.com/xtls/xray-core/common/retry"
-	"github.com/xtls/xray-core/common/session"
-	"github.com/xtls/xray-core/common/signal"
-	"github.com/xtls/xray-core/common/task"
-	"github.com/xtls/xray-core/common/xudp"
-	core "github.com/xtls/xray-core/core"
-	"github.com/xtls/xray-core/features/policy"
-	"github.com/xtls/xray-core/features/stats"
-	"github.com/xtls/xray-core/proxy/vless"
-	"github.com/xtls/xray-core/proxy/vless/encoding"
-	"github.com/xtls/xray-core/transport"
-	"github.com/xtls/xray-core/transport/internet"
-	"github.com/xtls/xray-core/transport/internet/stat"
-	"github.com/xtls/xray-core/transport/internet/tls"
-	"github.com/xtls/xray-core/transport/internet/xtls"
+	"github.com/dharak36/xray-core/common"
+	"github.com/dharak36/xray-core/common/buf"
+	"github.com/dharak36/xray-core/common/net"
+	"github.com/dharak36/xray-core/common/platform"
+	"github.com/dharak36/xray-core/common/protocol"
+	"github.com/dharak36/xray-core/common/retry"
+	"github.com/dharak36/xray-core/common/session"
+	"github.com/dharak36/xray-core/common/signal"
+	"github.com/dharak36/xray-core/common/task"
+	"github.com/dharak36/xray-core/common/xudp"
+	core "github.com/dharak36/xray-core/core"
+	"github.com/dharak36/xray-core/features/policy"
+	"github.com/dharak36/xray-core/features/stats"
+	"github.com/dharak36/xray-core/proxy/vless"
+	"github.com/dharak36/xray-core/proxy/vless/encoding"
+	"github.com/dharak36/xray-core/transport"
+	"github.com/dharak36/xray-core/transport/internet"
+	"github.com/dharak36/xray-core/transport/internet/stat"
+	"github.com/dharak36/xray-core/transport/internet/tls"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 var xtls_show = false

@@ -1,6 +1,6 @@
 package xtls
 
-import "github.com/xtls/xray-core/common/errors"
+import "github.com/dharak36/xray-core/common/errors"
 
 type errPathObjHolder struct{}
 

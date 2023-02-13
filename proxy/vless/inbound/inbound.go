@@ -1,6 +1,6 @@
 package inbound
 
-//go:generate go run github.com/xtls/xray-core/common/errors/errorgen
+//go:generate go run github.com/dharak36/xray-core/common/errors/errorgen
 
 import (
 	"context"
@@ -10,28 +10,28 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/xtls/xray-core/common"
-	"github.com/xtls/xray-core/common/buf"
-	"github.com/xtls/xray-core/common/errors"
-	"github.com/xtls/xray-core/common/log"
-	"github.com/xtls/xray-core/common/net"
-	"github.com/xtls/xray-core/common/platform"
-	"github.com/xtls/xray-core/common/protocol"
-	"github.com/xtls/xray-core/common/retry"
-	"github.com/xtls/xray-core/common/session"
-	"github.com/xtls/xray-core/common/signal"
-	"github.com/xtls/xray-core/common/task"
-	core "github.com/xtls/xray-core/core"
-	"github.com/xtls/xray-core/features/dns"
-	feature_inbound "github.com/xtls/xray-core/features/inbound"
-	"github.com/xtls/xray-core/features/policy"
-	"github.com/xtls/xray-core/features/routing"
-	"github.com/xtls/xray-core/features/stats"
-	"github.com/xtls/xray-core/proxy/vless"
-	"github.com/xtls/xray-core/proxy/vless/encoding"
-	"github.com/xtls/xray-core/transport/internet/stat"
-	"github.com/xtls/xray-core/transport/internet/tls"
-	"github.com/xtls/xray-core/transport/internet/xtls"
+	"github.com/dharak36/xray-core/common"
+	"github.com/dharak36/xray-core/common/buf"
+	"github.com/dharak36/xray-core/common/errors"
+	"github.com/dharak36/xray-core/common/log"
+	"github.com/dharak36/xray-core/common/net"
+	"github.com/dharak36/xray-core/common/platform"
+	"github.com/dharak36/xray-core/common/protocol"
+	"github.com/dharak36/xray-core/common/retry"
+	"github.com/dharak36/xray-core/common/session"
+	"github.com/dharak36/xray-core/common/signal"
+	"github.com/dharak36/xray-core/common/task"
+	core "github.com/dharak36/xray-core/core"
+	"github.com/dharak36/xray-core/features/dns"
+	feature_inbound "github.com/dharak36/xray-core/features/inbound"
+	"github.com/dharak36/xray-core/features/policy"
+	"github.com/dharak36/xray-core/features/routing"
+	"github.com/dharak36/xray-core/features/stats"
+	"github.com/dharak36/xray-core/proxy/vless"
+	"github.com/dharak36/xray-core/proxy/vless/encoding"
+	"github.com/dharak36/xray-core/transport/internet/stat"
+	"github.com/dharak36/xray-core/transport/internet/tls"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 var xtls_show = false
@@ -441,10 +441,20 @@ func (h *Handler) Process(ctx context.Context, network net.Network, connection s
 
 	var netConn net.Conn
 	var rawConn syscall.RawConn
-
+	allowNoneFlow := false
+	accountFlow := account.Flow
+	flows := strings.Split(account.Flow, ",")
+	for _, f := range flows {
+		t := strings.TrimSpace(f)
+		if t == "none" {
+			allowNoneFlow = true
+		} else {
+			accountFlow = t
+		}
+	}
 	switch requestAddons.Flow {
 	case vless.XRO, vless.XRD, vless.XRV:
-		if account.Flow == requestAddons.Flow {
+		if accountFlow == requestAddons.Flow {
 			switch request.Command {
 			case protocol.RequestCommandMux:
 				return newError(requestAddons.Flow + " doesn't support Mux").AtWarning()
@@ -481,7 +491,11 @@ func (h *Handler) Process(ctx context.Context, network net.Network, connection s
 		} else {
 			return newError(account.ID.String() + " is not able to use " + requestAddons.Flow).AtWarning()
 		}
-	case "":
+	case "", "none":
+		if accountFlow == vless.XRV && !allowNoneFlow {
+			return newError(account.ID.String() + " is not able to use " + vless.XRV + 
+			". Note the pure tls proxy has certain tls in tls characters. Append \",none\" in flow to suppress").AtWarning()
+		}
 	default:
 		return newError("unknown request flow " + requestAddons.Flow).AtWarning()
 	}

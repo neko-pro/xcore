@@ -11,13 +11,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gorilla/websocket"
-	"github.com/xtls/xray-core/common"
-	"github.com/xtls/xray-core/common/net"
-	http_proto "github.com/xtls/xray-core/common/protocol/http"
-	"github.com/xtls/xray-core/common/session"
-	"github.com/xtls/xray-core/transport/internet"
-	v2tls "github.com/xtls/xray-core/transport/internet/tls"
+	"github.com/dharak36/websocket"
+	"github.com/dharak36/xray-core/common"
+	"github.com/dharak36/xray-core/common/net"
+	http_proto "github.com/dharak36/xray-core/common/protocol/http"
+	"github.com/dharak36/xray-core/common/session"
+	"github.com/dharak36/xray-core/transport/internet"
+	v2tls "github.com/dharak36/xray-core/transport/internet/tls"
 )
 
 type requestHandler struct {
@@ -37,10 +37,6 @@ var upgrader = &websocket.Upgrader{
 }
 
 func (h *requestHandler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
-	if request.URL.Path != h.path {
-		writer.WriteHeader(http.StatusNotFound)
-		return
-	}
 
 	var extraReader io.Reader
 	responseHeader := http.Header{}

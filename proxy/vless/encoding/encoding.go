@@ -1,6 +1,6 @@
 package encoding
 
-//go:generate go run github.com/xtls/xray-core/common/errors/errorgen
+//go:generate go run github.com/dharak36/xray-core/common/errors/errorgen
 
 import (
 	"bytes"
@@ -14,17 +14,17 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/xtls/xray-core/common/buf"
-	"github.com/xtls/xray-core/common/errors"
-	"github.com/xtls/xray-core/common/net"
-	"github.com/xtls/xray-core/common/protocol"
-	"github.com/xtls/xray-core/common/session"
-	"github.com/xtls/xray-core/common/signal"
-	"github.com/xtls/xray-core/features/stats"
-	"github.com/xtls/xray-core/proxy/vless"
-	"github.com/xtls/xray-core/transport/internet/stat"
-	"github.com/xtls/xray-core/transport/internet/tls"
-	"github.com/xtls/xray-core/transport/internet/xtls"
+	"github.com/dharak36/xray-core/common/buf"
+	"github.com/dharak36/xray-core/common/errors"
+	"github.com/dharak36/xray-core/common/net"
+	"github.com/dharak36/xray-core/common/protocol"
+	"github.com/dharak36/xray-core/common/session"
+	"github.com/dharak36/xray-core/common/signal"
+	"github.com/dharak36/xray-core/features/stats"
+	"github.com/dharak36/xray-core/proxy/vless"
+	"github.com/dharak36/xray-core/transport/internet/stat"
+	"github.com/dharak36/xray-core/transport/internet/tls"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 const (
@@ -260,8 +260,8 @@ func XtlsRead(reader buf.Reader, writer buf.Writer, timer signal.ActivityUpdater
 		for {
 			if shouldSwitchToDirectCopy {
 				shouldSwitchToDirectCopy = false
-				if runtime.GOOS == "linux" || runtime.GOOS == "android" {
-					if inbound := session.InboundFromContext(ctx); inbound != nil && inbound.Conn != nil {
+				if inbound := session.InboundFromContext(ctx); inbound != nil && inbound.Conn != nil && (runtime.GOOS == "linux" || runtime.GOOS == "android") {
+					if _, ok := inbound.User.Account.(*vless.MemoryAccount); inbound.User.Account == nil || ok {
 						iConn := inbound.Conn
 						statConn, ok := iConn.(*stat.CounterConnection)
 						if ok {
@@ -281,11 +281,7 @@ func XtlsRead(reader buf.Reader, writer buf.Writer, timer signal.ActivityUpdater
 								statConn.WriteCounter.Add(w)
 							}
 							return err
-						} else {
-							panic("XTLS Splice: not TCP inbound")
 						}
-					} else {
-						// panic("XTLS Splice: nil inbound or nil inbound.Conn")
 					}
 				}
 				reader = buf.NewReadVReader(conn, rawConn, nil)

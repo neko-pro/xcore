@@ -3,10 +3,10 @@ package pipe
 import (
 	"context"
 
-	"github.com/xtls/xray-core/common/buf"
-	"github.com/xtls/xray-core/common/signal"
-	"github.com/xtls/xray-core/common/signal/done"
-	"github.com/xtls/xray-core/features/policy"
+	"github.com/dharak36/xray-core/common/buf"
+	"github.com/dharak36/xray-core/common/signal"
+	"github.com/dharak36/xray-core/common/signal/done"
+	"github.com/dharak36/xray-core/features/policy"
 )
 
 // Option for creating new Pipes.

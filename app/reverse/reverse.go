@@ -1,16 +1,16 @@
 package reverse
 
-//go:generate go run github.com/xtls/xray-core/common/errors/errorgen
+//go:generate go run github.com/dharak36/xray-core/common/errors/errorgen
 
 import (
 	"context"
 
-	"github.com/xtls/xray-core/common"
-	"github.com/xtls/xray-core/common/errors"
-	"github.com/xtls/xray-core/common/net"
-	core "github.com/xtls/xray-core/core"
-	"github.com/xtls/xray-core/features/outbound"
-	"github.com/xtls/xray-core/features/routing"
+	"github.com/dharak36/xray-core/common"
+	"github.com/dharak36/xray-core/common/errors"
+	"github.com/dharak36/xray-core/common/net"
+	core "github.com/dharak36/xray-core/core"
+	"github.com/dharak36/xray-core/features/outbound"
+	"github.com/dharak36/xray-core/features/routing"
 )
 
 const (

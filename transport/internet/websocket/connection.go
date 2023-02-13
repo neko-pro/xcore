@@ -5,7 +5,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/gorilla/websocket"
+	"github.com/dharak36/websocket"
 	"github.com/dharak36/xray-core/common/buf"
 	"github.com/dharak36/xray-core/common/errors"
 	"github.com/dharak36/xray-core/common/serial"

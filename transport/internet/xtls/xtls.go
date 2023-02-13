@@ -1,7 +1,7 @@
 package xtls
 
 import (
-	xtls "github.com/dharak36/go"
+	xtls "github.com/xtls/go"
 
 	"github.com/dharak36/xray-core/common/net"
 )

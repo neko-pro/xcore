@@ -11,7 +11,7 @@ import (
 	"github.com/dharak36/xray-core/transport/internet"
 	"github.com/dharak36/xray-core/transport/internet/stat"
 	"github.com/dharak36/xray-core/transport/internet/tls"
-	"github.com/dharak36/xray-core/transport/internet/dharak36"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 func Dial(ctx context.Context, dest net.Destination, streamSettings *internet.MemoryStreamConfig) (stat.Connection, error) {

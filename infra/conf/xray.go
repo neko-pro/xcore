@@ -13,7 +13,7 @@ import (
 	"github.com/dharak36/xray-core/common/serial"
 	core "github.com/dharak36/xray-core/core"
 	"github.com/dharak36/xray-core/transport/internet"
-	"github.com/dharak36/xray-core/transport/internet/dharak36"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 var (

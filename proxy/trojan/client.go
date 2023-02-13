@@ -21,7 +21,7 @@ import (
 	"github.com/dharak36/xray-core/transport"
 	"github.com/dharak36/xray-core/transport/internet"
 	"github.com/dharak36/xray-core/transport/internet/stat"
-	"github.com/dharak36/xray-core/transport/internet/dharak36"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 // Client is a inbound handler for trojan protocol

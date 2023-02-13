@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.18.0
-// source: transport/internet/dharak36/config.proto
+// source: transport/internet/xtls/config.proto
 
 package xtls
 

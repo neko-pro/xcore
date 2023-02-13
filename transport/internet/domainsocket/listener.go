@@ -9,13 +9,13 @@ import (
 	"os"
 	"strings"
 
-	goxtls "github.com/dharak36/go"
+	goxtls "github.com/xtls/go"
 	"github.com/dharak36/xray-core/common"
 	"github.com/dharak36/xray-core/common/net"
 	"github.com/dharak36/xray-core/transport/internet"
 	"github.com/dharak36/xray-core/transport/internet/stat"
 	"github.com/dharak36/xray-core/transport/internet/tls"
-	"github.com/dharak36/xray-core/transport/internet/dharak36"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 	"golang.org/x/sys/unix"
 )
 

@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	xtls "github.com/dharak36/go"
+	xtls "github.com/xtls/go"
 	"github.com/dharak36/xray-core/common"
 	"github.com/dharak36/xray-core/common/protocol/tls/cert"
-	. "github.com/dharak36/xray-core/transport/internet/dharak36"
+	. "github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 func TestCertificateIssuing(t *testing.T) {

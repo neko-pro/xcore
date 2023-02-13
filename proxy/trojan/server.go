@@ -27,7 +27,7 @@ import (
 	"github.com/dharak36/xray-core/transport/internet/stat"
 	"github.com/dharak36/xray-core/transport/internet/tls"
 	"github.com/dharak36/xray-core/transport/internet/udp"
-	"github.com/dharak36/xray-core/transport/internet/dharak36"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 func init() {

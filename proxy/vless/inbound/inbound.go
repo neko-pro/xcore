@@ -31,7 +31,7 @@ import (
 	"github.com/dharak36/xray-core/proxy/vless/encoding"
 	"github.com/dharak36/xray-core/transport/internet/stat"
 	"github.com/dharak36/xray-core/transport/internet/tls"
-	"github.com/dharak36/xray-core/transport/internet/dharak36"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 var xtls_show = false
@@ -441,10 +441,20 @@ func (h *Handler) Process(ctx context.Context, network net.Network, connection s
 
 	var netConn net.Conn
 	var rawConn syscall.RawConn
-
+	allowNoneFlow := false
+	accountFlow := account.Flow
+	flows := strings.Split(account.Flow, ",")
+	for _, f := range flows {
+		t := strings.TrimSpace(f)
+		if t == "none" {
+			allowNoneFlow = true
+		} else {
+			accountFlow = t
+		}
+	}
 	switch requestAddons.Flow {
 	case vless.XRO, vless.XRD, vless.XRV:
-		if account.Flow == requestAddons.Flow {
+		if accountFlow == requestAddons.Flow {
 			switch request.Command {
 			case protocol.RequestCommandMux:
 				return newError(requestAddons.Flow + " doesn't support Mux").AtWarning()
@@ -481,7 +491,11 @@ func (h *Handler) Process(ctx context.Context, network net.Network, connection s
 		} else {
 			return newError(account.ID.String() + " is not able to use " + requestAddons.Flow).AtWarning()
 		}
-	case "":
+	case "", "none":
+		if accountFlow == vless.XRV && !allowNoneFlow {
+			return newError(account.ID.String() + " is not able to use " + vless.XRV + 
+			". Note the pure tls proxy has certain tls in tls characters. Append \",none\" in flow to suppress").AtWarning()
+		}
 	default:
 		return newError("unknown request flow " + requestAddons.Flow).AtWarning()
 	}

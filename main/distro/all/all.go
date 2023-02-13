@@ -60,7 +60,7 @@ import (
 	_ "github.com/dharak36/xray-core/transport/internet/tls"
 	_ "github.com/dharak36/xray-core/transport/internet/udp"
 	_ "github.com/dharak36/xray-core/transport/internet/websocket"
-	_ "github.com/dharak36/xray-core/transport/internet/dharak36"
+	_ "github.com/dharak36/xray-core/transport/internet/xtls"
 
 	// Transport headers
 	_ "github.com/dharak36/xray-core/transport/internet/headers/http"

@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	xtls "github.com/dharak36/go"
+	xtls "github.com/xtls/go"
 	"github.com/dharak36/xray-core/common/net"
 	"github.com/dharak36/xray-core/common/ocsp"
 	"github.com/dharak36/xray-core/common/platform/filesystem"

@@ -6,7 +6,7 @@ import (
 	gotls "crypto/tls"
 	"sync"
 
-	goxtls "github.com/dharak36/go"
+	goxtls "github.com/xtls/go"
 	"github.com/dharak36/xray-core/common"
 	"github.com/dharak36/xray-core/common/buf"
 	"github.com/dharak36/xray-core/common/net"
@@ -14,7 +14,7 @@ import (
 	"github.com/dharak36/xray-core/transport/internet/stat"
 	"github.com/dharak36/xray-core/transport/internet/tls"
 	"github.com/dharak36/xray-core/transport/internet/udp"
-	"github.com/dharak36/xray-core/transport/internet/dharak36"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 type ConnectionID struct {

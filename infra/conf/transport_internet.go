@@ -21,7 +21,7 @@ import (
 	"github.com/dharak36/xray-core/transport/internet/tcp"
 	"github.com/dharak36/xray-core/transport/internet/tls"
 	"github.com/dharak36/xray-core/transport/internet/websocket"
-	"github.com/dharak36/xray-core/transport/internet/dharak36"
+	"github.com/dharak36/xray-core/transport/internet/xtls"
 )
 
 var (

@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gorilla/websocket"
+	"github.com/dharak36/websocket"
 	"github.com/dharak36/xray-core/common"
 	"github.com/dharak36/xray-core/common/net"
 	http_proto "github.com/dharak36/xray-core/common/protocol/http"
@@ -37,10 +37,6 @@ var upgrader = &websocket.Upgrader{
 }
 
 func (h *requestHandler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
-	if request.URL.Path != h.path {
-		writer.WriteHeader(http.StatusNotFound)
-		return
-	}
 
 	var extraReader io.Reader
 	responseHeader := http.Header{}
